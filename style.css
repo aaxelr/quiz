@@ -1,0 +1,15 @@
+h1 {
+  font-size: 2.4em;
+  font-family: Helvetica, sans-serif;
+  text-shadow: 2px 3px aquamarine;
+}
+
+.inputDiv {
+  background-color: aquamarine;
+}
+
+/* form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */

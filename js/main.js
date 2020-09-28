@@ -1,6 +1,7 @@
 class Quiz {
     constructor() {
-        //?
+        this.noOfQuestions;
+        this.points;
     }
 
 
