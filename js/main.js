@@ -1,7 +1,8 @@
-class Quiz {
+//klass för själva spelet.
+class Quiz { //?
     constructor() {
-        this.noOfQuestions;
-        this.points;
+        this.noOfQuestions; //5-10
+        //this.points;
     }
 
 
