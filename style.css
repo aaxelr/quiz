@@ -1,15 +1,49 @@
-h1 {
-  font-size: 2.4em;
+body {
+  background-color: rgb(0, 0, 50);
+  padding: 10px 20%;
   font-family: Helvetica, sans-serif;
-  text-shadow: 2px 3px aquamarine;
 }
 
-.inputDiv {
-  background-color: aquamarine;
+header {
+  background-color: rgb(255, 240, 230);
+  border-radius: 15px;
+  padding: 10px;
+  margin: 10px;
+}
+#title {
+  text-shadow: -4px -3px silver;
 }
 
-/* form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
+table {
+  border: none;
+  width: 100%;
+}
+
+tr {
+  border: none;
+  width: 100%;
+}
+th, td {
+  border: none;
+}
+
+.wrapper {
+  background-color: rgb(255, 230, 200);
+  padding: 20px;
+  border-radius: 15px;
+  margin: 10px;
+}
+
+.content {
+  background-color: rgb(255,255,255);
+  padding: 20px;
+  border-radius: 15px;
+}
+
+footer {
+  color: rgb(255, 240, 230);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding: 0px 20px;
+}

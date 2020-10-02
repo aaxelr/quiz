@@ -5,73 +5,66 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
   <title>Quiz</title>
 </head>
 
 <body>
-  <!-- 
+  <!-- Header element with title and navigation -->
+  <header>
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2">
+            <h1 id="title">QUIZ</h1><span>New! Cool! Improved!</span>
+          </th>
+          <th>
+            <p>Welcome, stranger!</p>
+          </th>
+        </tr>
+      </thead>
+
+      <nav>
+        <tbody>
+          <tr>
+            <td><a href="#">Start</a></td>
+            <td><a href="#">Hi-Score</a></td>
+            <td><a href="#">Contact</a></td>
+          </tr>
+        </tbody>
+      </nav>
+    </table>
+  </header>
+  <table>
+
+    <!-- 
         startsida med namn+epostformulär, starta quiz-knapp
         quizets regler, förklaring av hints (poängavdrag? visa antal hints använda)
         
     -->
-  <div class="firstPageForm">
-    <h1>QUIZ! New! Cool! Improved!</h1>
-    <p>Enter your name and e-mail address to continue~ ˚✧₊⁎❝᷀ົཽ≀ˍ̮ ❝᷀ົཽ⁎⁺˳✧༚
-    </p>
-    <form>
-      <div class="inputDiv">
-        <label for="name">Name: </label>
-        <input id="name" type="text" placeholder="John Doe" required>
-        <label for="email">E-mail address: </label>
-        <input id="email" type="email" placeholder="joe@doe.no" required>
-        <label for="noOfQuestions"># of Questions</label> <!-- kanske ha som sida 2? -->
-        <input id="noOfQuestions" type="number" min="5" max="10" value="5">
-        <button type="button">Submit</button>
+    <!-- Main element containing quiz form -->
+    <main>
+      <div class="wrapper">
+        <div class="content">
+          <p>This is a quiz.</p>
+          <p><span>Rules:</span> Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Temporibus fuga ipsum amet minima, dicta praesentium excepturi voluptatibus, eligendi distinctio aliquid
+            vitae quo in corrupti veritatis! Totam animi tempore esse libero amet. Commodi, nostrum error.</p>
+          <form>
+            <button id="startBtn" type="button">Let's go!</button>
+          </form>
+        </div>
       </div>
-    </form>
-  </div>
-  <br>
-  <br>
-  <br>
-  <br>
-  <div class="mockQuiz">
-    <form>
-      <h2>Question 1: Single Choice</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aperiam eum id voluptatum fugiat odio
-        aliquid voluptatem maiores animi excepturi! Lorem, ipsum dolor?
-      </p>
-      <ul>
-        <li>Lorem, ipsum.</li>
-        <li>Lorem ipsum dolor sit.</li>
-        <li>Lorem, ipsum dolor.</li>
-        <li>Voluptatem maiores animi.</li>
-      </ul>
-    </form>
-  </div>
-  <br>
-  <br>
-  <br>
-  <br>
-  <div class="mockQuiz">
-    <form>
-      <h2>Question 2: Multiple Choice</h2>
-      <p>Harum cupiditate, non quia aspernatur reiciendis rem optio assumenda adipisci in explicabo at maiores, fugit
-        fugiat esse incidunt? Ullam ut facere, nostrum, consequuntur, repellendus officiis doloremque vitae vero rem
-        beatae ex illum consequatur obcaecati quibusdam!
-      </p>
-      <ul>
-        <li>Lorem, ipsum.<input type="checkbox"></li>
-        <li>Lorem ipsum dolor sit.<input type="checkbox"></li>
-        <li>Lorem, ipsum dolor.<input type="checkbox"></li>
-        <li>Voluptatem maiores animi.<input type="checkbox"></li>
-        <button type="button">Previous Question</button>
-        <button type="button">Next Question</button>
-      </ul>
-    </form>
-  </div>
-  <script src="js/player.js"></script>
-  <script src="js/quiz.js"></script>
-  <script src="js/main.js"></script>
+    </main>
+
+    <footer>
+      <h4>©®™ 2020</h4>
+    </footer>
+
+    <!-- <script src="js/player.js"></script>
+    <script src="js/question.js"></script> -->
+    <script src="js/main.js"></script>
 </body>
 
 </html>
