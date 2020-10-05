@@ -1,9 +1,12 @@
 /* ~~~~KLASSER~~~~ */
 
+//async function möjliggör senare await funktion 
+
 //klass för enskild fråga.
 class Question {
   constructor() { //vad ska constuctor:n ta för parameter?
-    this.id; //för att förhindra samma fråga flera ggr
+    this.quizId = 1; //++ för nytt eget id 
+    this.questionId = frågeID; //för att förhindra samma fråga flera ggr
     this.question;
     this.answers; //objekt med svarsalternativ
     this.correctAnswers; //det/de egenskaperna med booleanska värdena true.
