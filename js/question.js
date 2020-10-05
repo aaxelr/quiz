@@ -2,10 +2,19 @@
 
 //klass för enskild fråga.
 class Question {
-  constructor() {
+  constructor() { //vad ska constuctor:n ta för parameter?
+    this.id; //för att förhindra samma fråga flera ggr
     this.question;
-    this.answers; 
-    this.correctAnswers;
+    this.answers; //objekt med svarsalternativ
+    this.correctAnswers; //det/de egenskaperna med booleanska värdena true.
+  }
+}
+
+//klass för samling av quizfrågor 5-10.
+//kanske flytta metoden getQuestions till class Questions???
+class Questions {
+  constructor(questionArray) {
+    this.questionArray = [];
   }
 
   //metod som hämtar 10 frågor (ändra limit=10 för annat antal? kanske spara hela arrayen och hämta frågor en i taget.)
@@ -14,33 +23,25 @@ class Question {
     fetch('https://quizapi.io/api/v1/questions?apiKey=dZrVAc1e2qq2imLf6b1UtP5578YvhW84BKvYbgTE&category=code&limit=10')
       .then(response => response.json())
       .then(data => {
-        this.question = data[i].question;
-        this.answers = data[i].answers;
-        this.correctAnswers = data[i].correct_answers;
+        this.question = data.question;
+        this.answers = data.answers;
+        this.correctAnswers = data.correct_answers;
       });
-  }
-
-
-}
-
-//klass för samling av quizfrågor 5-10. överflödig?
-//kanske flytta metoden getQuestions till class Questions
-class Questions {
-  constructor(noOfQuestions) {
-
-
   }
 }
 
 //klass innehållandes array med rätt svar och HTMLCollection med användares svar.
+
 class Correct {
   constructor() {
-    this.arrayWithCorrectAnswers;
-    this.HTMLColWithUserAnswers;
+    this.arrayWithCorrectAnswers; //borde hämtas från class Questions?
+    this.HTMLColWithUserAnswers; //kommer från användarens input.
   }
 
   //metod som ska jämföra användarens svar med facit
   checkAnswers(users, correct) {
+    //loopa igenom rätt svar med användares svar.
+    //om facit[0] === användarSvar[0] får användaren poäng.
 
   }
 }
@@ -49,5 +50,3 @@ class Correct {
 let q1 = new Question();
 
 q1.getQuestions();
-
-
