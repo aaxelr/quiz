@@ -5,7 +5,7 @@
 //klass för enskild fråga.
 class Question {
   constructor() { //vad ska constuctor:n ta för parameter?
-    this.quizId = 1; //++ för nytt eget id 
+    this.quizId = 1; //++ för nytt eget id ??
     this.questionId = frågeID; //för att förhindra samma fråga flera ggr
     this.question;
     this.answers; //objekt med svarsalternativ
@@ -42,6 +42,7 @@ class Correct {
   }
 
   //metod som ska jämföra användarens svar med facit
+  //lägg ev i question-klassen
   checkAnswers(users, correct) {
     //loopa igenom rätt svar med användares svar.
     //om facit[0] === användarSvar[0] får användaren poäng.
