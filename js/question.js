@@ -1,56 +1,46 @@
 /* ~~~~KLASSER~~~~ */
 
-//async function möjliggör senare await funktion 
+//async function möjliggör senare await funktion VAR SKA DEN LIGGA? 
+//VAR lägga eventlyssnare?
 
+//------------------------------------
 //klass för enskild fråga.
 class Question {
-  constructor() { //vad ska constuctor:n ta för parameter?
-    this.quizId = 1; //++ för nytt eget id ??
-    this.questionId = frågeID; //för att förhindra samma fråga flera ggr
-    this.question;
-    this.answers; //objekt med svarsalternativ
-    this.correctAnswers; //det/de egenskaperna med booleanska värdena true.
+  constructor(id, question, answers, correctAnswers) { //vad ska constuctor:n ta för parameter?
+    this.questionId = id; //för att förhindra samma fråga flera ggr
+    this.question = question;
+    this.answers = answers; //objekt med svarsalternativ
+    this.correctAnswers = correctAnswers; //det/de egenskaperna med booleanska värdena true.
+  }
+
+  createQuestionElement() {
+
+    //div som omsluter allt
+    //p för fråga
+    //ul med li för varje svarsalternativ
+
   }
 }
 
 //klass för samling av quizfrågor 5-10.
-//kanske flytta metoden getQuestions till class Questions???
 class Questions {
-  constructor(questionArray) {
+  constructor() {
     this.questionArray = [];
   }
 
-  //metod som hämtar 10 frågor (ändra limit=10 för annat antal? kanske spara hela arrayen och hämta frågor en i taget.)
-  //alt. lägg in en variable (let nrOfQuestions = 'limit=(userinput)')
-  getQuestions() { //fetch().then().then().catch();
-    fetch('https://quizapi.io/api/v1/questions?apiKey=dZrVAc1e2qq2imLf6b1UtP5578YvhW84BKvYbgTE&category=code&limit=10')
+  //metod som hämtar 5-10 (5 default) frågor
+  getQuestions(userNumberOfQuestions = 5) { //fetch().then().then().catch();
+    fetch(`'https://quizapi.io/api/v1/questions?apiKey=dZrVAc1e2qq2imLf6b1UtP5578YvhW84BKvYbgTE&category=code&limit='${userNumberOfQuestions}`)
       .then(response => response.json())
-      .then(data => {
-        this.question = data.question;
-        this.answers = data.answers;
-        this.correctAnswers = data.correct_answers;
+      .then(data => { 
+        //lös så att hämtade svaret skapar en instans av Question för varje objekt i array
+        //filtrera bort null-svar.
+        console.log(data);
       });
   }
 }
 
-//klass innehållandes array med rätt svar och HTMLCollection med användares svar.
-
-class Correct {
-  constructor() {
-    this.arrayWithCorrectAnswers; //borde hämtas från class Questions?
-    this.HTMLColWithUserAnswers; //kommer från användarens input.
-  }
-
-  //metod som ska jämföra användarens svar med facit
-  //lägg ev i question-klassen
-  checkAnswers(users, correct) {
-    //loopa igenom rätt svar med användares svar.
-    //om facit[0] === användarSvar[0] får användaren poäng.
-
-  }
-}
-
 /* ---------------------------------------------------------------- */
-let q1 = new Question();
+let q1 = new Questions();
 
 q1.getQuestions();

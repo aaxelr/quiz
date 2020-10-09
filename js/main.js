@@ -1,14 +1,14 @@
 //klass för själva spelet.
+//Hanterar användarinput
+    //input från inputfält
+    //knapptryck
 class Quiz { //?
     constructor() {
-        this.noOfQuestions; //5-10
-        //this.points;
+        //this.userNumberOfQuestions = new Questions?'inputfrånwebb'; //5-10
+        //this.player = new Player()
+        //this.
     }
-
-
 }
-
-//check players name && email is unique to prevent multiple tries?
 
 let enterName; //skapa html-element med namnformulär där namn ska skickas till Player-klassen?
 
