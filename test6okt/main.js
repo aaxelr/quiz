@@ -222,8 +222,6 @@ class Player {
 //let nextQuestionBtn = document.createElement("button", )
 
 
-
-
 document.addEventListener("DOMContentLoaded", () => {
 
   //------EVENT LISTENERS------
@@ -243,12 +241,5 @@ document.addEventListener("DOMContentLoaded", () => {
     newPlayer.welcomePlayer(newPlayer.name);
 
   });
-
-
-
-
-
-
-
 
 });

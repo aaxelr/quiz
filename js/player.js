@@ -1,5 +1,5 @@
+//KLASS
 
-//klass för spelare
 class Player {
     constructor(name = 'stranger') {
         this.name = name;
@@ -13,9 +13,9 @@ class Player {
     }
   }
   
-  let me = new Player("Antonio");
+  /* let me = new Player("Antonio");
   console.log(me);
-
+ */
 //Player.answers ska pushas med användarens svar.
 //Player.score ska pushas med 1 om svaret är rätt och 0 om svaret är fel
 

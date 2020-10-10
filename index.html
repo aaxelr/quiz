@@ -20,7 +20,7 @@
             <h1 id="title">QUIZ</h1><span>New! Cool! Improved!</span>
           </th>
           <th>
-            <p>Welcome, stranger!</p>
+            <p id="welcome">Welcome, stranger!</p>
           </th>
         </tr>
       </thead>
@@ -47,6 +47,10 @@
     <main>
       <div class="wrapper">
         <div class="content">
+          <label for="nameInput">Enter your name:</label><br>
+          <input id="nameInput" type="text" placeholder="Robin Bank$" required><br><br>
+          <label for="nrOfQuestionsInput">Choose # of Questions (5–10):</label><br>
+          <input id="nrOfQuestionsInput" type="number" min="5" max="10" value="5">
           <p>This is a quiz.</p>
           <p><span>Rules:</span> Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Temporibus fuga ipsum amet minima, dicta praesentium excepturi voluptatibus, eligendi distinctio aliquid
@@ -62,8 +66,8 @@
       <h4>©®™ 2020</h4>
     </footer>
 
-    <!-- <script src="js/player.js"></script>
-    <script src="js/question.js"></script> -->
+    <script src="js/player.js"></script>
+    <script src="js/question.js"></script>
     <script src="js/main.js"></script>
 </body>
 

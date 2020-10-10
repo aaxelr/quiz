@@ -1,9 +1,5 @@
-/* ~~~~KLASSER~~~~ */
+//KLASSER
 
-//async function möjliggör senare await funktion VAR SKA DEN LIGGA? 
-//VAR lägga eventlyssnare?
-
-//------------------------------------
 //klass för enskild fråga.
 class Question {
   constructor(id, question, answers, correctAnswers) { //vad ska constuctor:n ta för parameter?
@@ -29,18 +25,32 @@ class Questions {
   }
 
   //metod som hämtar 5-10 (5 default) frågor
-  getQuestions(userNumberOfQuestions = 5) { //fetch().then().then().catch();
-    fetch(`'https://quizapi.io/api/v1/questions?apiKey=dZrVAc1e2qq2imLf6b1UtP5578YvhW84BKvYbgTE&category=code&limit='${userNumberOfQuestions}`)
+  async getQuestions(userNumberOfQuestions = 5) { //fetch().then().then().catch();
+    await fetch(`https://quizapi.io/api/v1/questions?apiKey=dZrVAc1e2qq2imLf6b1UtP5578YvhW84BKvYbgTE&category=code&limit=${userNumberOfQuestions}`)
       .then(response => response.json())
-      .then(data => { 
-        //lös så att hämtade svaret skapar en instans av Question för varje objekt i array
-        //filtrera bort null-svar.
-        console.log(data);
+      .then(data => {
+        for (let question of data) {
+          //ta bort key in answers med värdet null
+          //ta bort key in correct_answers med värdet false
+          this.questionArray.push(new Question(question.id, question.question, question.answers, question.correct_answers));
+        }
       });
   }
+
+  
+
+  /* ---------------------------------------------------------------- */
+
+  //q1.getQuestions();
+
+  //async function möjliggör senare await funktion VAR SKA DEN LIGGA? 
+  //VAR lägga eventlyssnare?
+
+  //lös så att hämtade svaret skapar en instans av Question för varje objekt i array
+  //filtrera bort null-svar.
+  /* const values = Object.values(user);
+console.log(values); // ["John", 29]
+ */
 }
 
-/* ---------------------------------------------------------------- */
-let q1 = new Questions();
-
-q1.getQuestions();
+//------------------------------------
