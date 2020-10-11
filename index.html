@@ -2,71 +2,74 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-  <title>Quiz</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <title>Quiz</title>
 </head>
 
 <body>
-  <!-- Header element with title and navigation -->
-  <header>
+    <!-- Header element with title and navigation -->
+    <header>
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">
+                        <h1 id="title">QUIZ</h1><span>New! Cool! Improved!</span>
+                    </th>
+                    <th>
+                        <p id="welcome">Welcome, stranger!</p>
+                    </th>
+                </tr>
+            </thead>
+
+            <nav>
+                <tbody>
+                    <tr>
+                        <td id="startTd"><a href="#">Start</a></td>
+                        <td id="hiscoreTd"><a href="https://www.google.com/search?q=high+score+table&tbm=isch"
+                                target="_blank">Hi-Score</a></td>
+                        <td id="contactTd"><a href="https://www.google.com/search?q=et+phone+home"
+                                target="_blank">Contact</a></td>
+                    </tr>
+                </tbody>
+            </nav>
+        </table>
+    </header>
     <table>
-      <thead>
-        <tr>
-          <th colspan="2">
-            <h1 id="title">QUIZ</h1><span>New! Cool! Improved!</span>
-          </th>
-          <th>
-            <p id="welcome">Welcome, stranger!</p>
-          </th>
-        </tr>
-      </thead>
 
-      <nav>
-        <tbody>
-          <tr>
-            <td id="startTd"><a href="#">Start</a></td>
-            <td id="hiscoreTd"><a href="https://www.google.com/search?q=high+score+table&tbm=isch" target="_blank">Hi-Score</a></td>
-            <td id="contactTd"><a href="https://www.google.com/search?q=et+phone+home" target="_blank">Contact</a></td>
-          </tr>
-        </tbody>
-      </nav>
-    </table>
-  </header>
-  <table>
-
-    <!-- 
+        <!-- 
         startsida med namnformulär, starta quiz-knapp
         quizets regler, förklaring av hints (poängavdrag? visa antal hints använda)
         
     -->
-    <!-- Main element containing quiz form -->
-    <main>
-      <div class="wrapper">
-        <div class="content">
-          <label for="nameInput">Enter your name:</label><br>
-          <input id="nameInput" type="text" placeholder="Robin Bank$" required="required"><br><br>
-          <label for="nrOfQuestionsInput">Choose # of Questions (5–10):</label><br>
-          <input id="nrOfQuestionsInput" type="number" min="5" max="10" value="5">
-          <p>This is a quiz.</p>
-          <p>Choose the correct answer(s). You get one point per question answered correctly.<br><br>Good Luck! :)</p>
-          <form>
-            <button id="startBtn" type="button">Start Quiz!</button>
-          </form>
-        </div>
-      </div>
-    </main>
+        <!-- Main element containing quiz form -->
+        <main>
+            <div class="wrapper">
+                <div id="contentDiv">
+                    <label for="nameInput">Enter your name:</label><br>
+                    <input id="nameInput" type="text" placeholder="Robin Bank$" required="required"><br><br>
+                    <label for="nrOfQuestionsInput">Choose # of Questions (5–10):</label><br>
+                    <input id="nrOfQuestionsInput" type="number" min="5" max="10" value="5">
+                    <p>This is a quiz.</p>
+                    <p>Choose the correct answer(s). You get one point per question answered correctly.<br><br>Good
+                        Luck! :)</p>
+                    <form>
+                        <button id="startBtn" type="button">Start Quiz!</button>
+                    </form>
+                </div>
+            </div>
+        </main>
 
-    <footer>
-      <h4>©®™ 2020</h4>
-    </footer>
+        <footer>
+            <h4>©®™ 2020</h4>
+        </footer>
 
-    <script src="js/player.js"></script>
-    <script src="js/question.js"></script>
-    <script src="js/main.js"></script>
+        <script src="js/player.js"></script>
+        <script src="js/question.js"></script>
+        <script src="js/main.js"></script>
 </body>
 
 </html>
