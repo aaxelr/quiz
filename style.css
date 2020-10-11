@@ -5,6 +5,19 @@ body {
   margin: 25px;
 }
 
+a {
+  font: 1.2em Helvetica;
+  
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: #000000; 
+}
+
 header {
   background-color: rgb(255, 240, 230);
   border-radius: 15px;
@@ -16,6 +29,12 @@ header {
 
 #title {
   text-shadow: -4px -3px silver;
+}
+
+#welcome {
+  font-size: 1.4em;
+  text-shadow: 3px -2px silver;
+
 }
 
 table {
@@ -62,4 +81,9 @@ footer {
   left: 0;
   bottom: 0;
   padding: 0px 20px;
+}
+
+li {
+  margin: 5px;
+  padding: 5px;
 }

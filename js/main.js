@@ -11,41 +11,79 @@ class Quiz { //?
         this.player = new Player(name)
     }
 
-    /* getNumberOfQuestions() {
-
-        this.numberOfQuestions = playerNumberOfQuestions;
-    } */
+    welcomePlayer() {
+        welcome.innerText = `Welcome, ${this.player.name}!`;
+    }
 
     setupQuestions(numberOfQuestions) {
         this.questions = new Questions()
         this.questions.getQuestions(numberOfQuestions);
-    }
-
-    welcomePlayer() {
-        welcome.innerText = `Welcome, ${this.player.name}`;
+        return this.questions;
     }
 
     removeContent() {
         contentDiv.innerHTML = "";
     }
 
-    async createQuestionElement(questionNr = 1) {
-        let questionElement = document.createElement("p");
-        let answersElement = document.createElement("ul");
-        let testArray = this.questions.questionArray;
-        console.log(testArray); //loggar array med alla frågor
-        console.log(testArray[0]); //visar 0
-        console.log(testArray[1]); //undefined
-        console.table(testArray);
-        console.log(typeof testArray);
-        //questionElement.innerHTML = testArray[1].question;
-        return questionElement;
+    createQuestionElement(questionNr) {
+        let questionPElement = document.createElement("p");
+        questionPElement.textContent = this.questions.questionArray[questionNr].question;
+
+        let answersUlElement = document.createElement("ul");
+
+        console.log(this.questions.questionArray[questionNr].multipleChoice);
+
+        if (this.questions.questionArray[questionNr].multipleChoice === "true") {
+            for (let answer in this.questions.questionArray[questionNr].answers) {
+                
+                let answerLiElement = document.createElement("li");
+                answerLiElement.setAttribute("id", `li_${answer}`);
+                answerLiElement.textContent = this.questions.questionArray[questionNr].answers[answer];
+
+                let checkbox = document.createElement("input");
+                checkbox.setAttribute("id", `answer_${answer}`);
+                checkbox.setAttribute("type", "checkbox");
+
+                answerLiElement.append(checkbox);
+
+                answersUlElement.append(answerLiElement);
+            }
+
+        } else {
+            for (let answer in this.questions.questionArray[questionNr].answers) {
+                
+                let answerLiElement = document.createElement("li");
+                answerLiElement.setAttribute("id", `li_${answer}`);
+                answerLiElement.textContent = this.questions.questionArray[questionNr].answers[answer];
+
+                let radio = document.createElement("input");
+                radio.setAttribute("id", `answer_${answer}`);
+                radio.setAttribute("name", "answer");
+                radio.setAttribute("type", "radio");
+
+                answerLiElement.append(radio);
+
+                answersUlElement.append(answerLiElement);
+            }
+        }
+
+
+        questionPElement.append(answersUlElement);
+
+        return questionPElement;
     }
 
-    showQuestion() {
-        contentDiv.append(this.createQuestionElement());
+    showQuestion(questionNr = 1) {
+        contentDiv.append(this.createQuestionElement(questionNr));
     }
 
+    showResults() {
+        console.log("resultat på g...")
+        //tabell?
+        //fråga | ditt svar | rätt svar
+        //...
+        //total
+    }
 
 }
 
@@ -59,8 +97,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let nameInput = document.getElementById("nameInput");
     let contentDiv = document.getElementById("contentDiv");
 
-    //Instansiera Quiz
+    let nextBtn = document.getElementById("nextBtn");
 
+    //Instansiera Quiz
     let quiz = new Quiz();
 
     //------Eventlyssnare
@@ -69,11 +108,19 @@ document.addEventListener("DOMContentLoaded", () => {
         quiz.setupQuestions(nrOfQuestionsInput.value)
         quiz.welcomePlayer(nameInput.value);
         quiz.round++;
-        quiz.createQuestionElement(1);
 
-        console.log(quiz);
         console.log(quiz.questions);
+    });
 
+    nextBtn.addEventListener("click", () => {
+        quiz.removeContent();
+        if (quiz.round === quiz.questions.questionArray.length) {
+            quiz.showResults();
+            console.log("GAME OVER");
+        } else {
+            quiz.showQuestion(quiz.round);
+            quiz.round++;
+        }
     });
 
 });
