@@ -25,6 +25,7 @@ class Quiz { //?
         contentDiv.innerHTML = "";
     }
 
+    //lägg till eventlyssnare på varje
     createQuestionElement(questionNr) {
         let questionPElement = document.createElement("p");
         questionPElement.textContent = this.questions.questionArray[questionNr].question;
@@ -35,7 +36,7 @@ class Quiz { //?
 
         if (this.questions.questionArray[questionNr].multipleChoice === "true") {
             for (let answer in this.questions.questionArray[questionNr].answers) {
-                
+
                 let answerLiElement = document.createElement("li");
                 answerLiElement.setAttribute("id", `li_${answer}`);
                 answerLiElement.textContent = this.questions.questionArray[questionNr].answers[answer];
@@ -51,7 +52,7 @@ class Quiz { //?
 
         } else {
             for (let answer in this.questions.questionArray[questionNr].answers) {
-                
+
                 let answerLiElement = document.createElement("li");
                 answerLiElement.setAttribute("id", `li_${answer}`);
                 answerLiElement.textContent = this.questions.questionArray[questionNr].answers[answer];
@@ -77,14 +78,26 @@ class Quiz { //?
         contentDiv.append(this.createQuestionElement(questionNr));
     }
 
-    showResults() {
-        console.log("resultat på g...")
+    getResult(playerScore) {
+        playerScore = playerScore.reduce((acc, curr) => acc + curr, 0);
+        return playerScore;
+    }
+
+    showResult(playerScore) {
+        let resultP = document.createElement("p");
+        resultP.innerText = `Total score: ${this.getResult(playerScore)}`;
+        console.log("hårdkodat till 3");
+        contentDiv.append(resultP);
         //tabell?
         //fråga | ditt svar | rätt svar
         //...
         //total
     }
 
+    restartQuiz() {
+     
+        //get new set of questions
+    }
 }
 
 //------DOMContentLoaded
@@ -114,9 +127,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     nextBtn.addEventListener("click", () => {
         quiz.removeContent();
+
         if (quiz.round === quiz.questions.questionArray.length) {
-            quiz.showResults();
+            quiz.showResult(quiz.player.score);
             console.log("GAME OVER");
+        } else if (quiz.round === quiz.questions.questionArray.length - 1) {
+            quiz.showQuestion(quiz.round);
+            quiz.round++;
+            nextBtn.innerText = "End Quiz"
         } else {
             quiz.showQuestion(quiz.round);
             quiz.round++;

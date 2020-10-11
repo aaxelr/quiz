@@ -7,7 +7,6 @@ body {
 
 a {
   font: 1.2em Helvetica;
-  
 }
 
 a:link,
@@ -34,7 +33,6 @@ header {
 #welcome {
   font-size: 1.4em;
   text-shadow: 3px -2px silver;
-
 }
 
 table {
@@ -59,7 +57,6 @@ th, td {
   text-align: right;
 }
 
-
 .wrapper {
   background-color: rgb(255, 240, 230);
   padding: 20px;
@@ -67,6 +64,7 @@ th, td {
   margin: 10px;
   min-width: 400px;
   max-width: 800px;
+  min-height: 400px;
 }
 
 .content {
