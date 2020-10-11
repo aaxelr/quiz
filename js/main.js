@@ -3,7 +3,7 @@ class Quiz { //?
     constructor() {
         this.player;
         this.questions;
-        this.playedQuestion = []; //array med id från respektive fråga, för att förhindra att samma fråga kommer igen, om spelaren vill spela igen.
+        //this.playedQuestion = []; //array med id från respektive fråga, för att förhindra att samma fråga kommer igen, om spelaren vill spela igen.
         this.round = 0;
     }
 
@@ -32,33 +32,24 @@ class Quiz { //?
 
         let answersUlElement = document.createElement("ul");
 
-        console.log(this.questions.questionArray[questionNr].multipleChoice);
+        for (let answer in this.questions.questionArray[questionNr].answers) {
+            let answerLiElement = document.createElement("li");
+            answerLiElement.setAttribute("id", `li_${answer}`);
+            answerLiElement.textContent = this.questions.questionArray[questionNr].answers[answer];
 
-        if (this.questions.questionArray[questionNr].multipleChoice === "true") {
-            for (let answer in this.questions.questionArray[questionNr].answers) {
-
-                let answerLiElement = document.createElement("li");
-                answerLiElement.setAttribute("id", `li_${answer}`);
-                answerLiElement.textContent = this.questions.questionArray[questionNr].answers[answer];
-
+            if (this.questions.questionArray[questionNr].multipleChoice === "true") {
                 let checkbox = document.createElement("input");
-                checkbox.setAttribute("id", `answer_${answer}`);
+                checkbox.setAttribute("id", answer);
+                checkbox.setAttribute("class", "checkboxAnswer");
                 checkbox.setAttribute("type", "checkbox");
 
                 answerLiElement.append(checkbox);
 
                 answersUlElement.append(answerLiElement);
-            }
-
-        } else {
-            for (let answer in this.questions.questionArray[questionNr].answers) {
-
-                let answerLiElement = document.createElement("li");
-                answerLiElement.setAttribute("id", `li_${answer}`);
-                answerLiElement.textContent = this.questions.questionArray[questionNr].answers[answer];
+            } else {
 
                 let radio = document.createElement("input");
-                radio.setAttribute("id", `answer_${answer}`);
+                radio.setAttribute("id", answer);
                 radio.setAttribute("name", "answer");
                 radio.setAttribute("type", "radio");
 
@@ -70,12 +61,34 @@ class Quiz { //?
 
 
         questionPElement.append(answersUlElement);
-
         return questionPElement;
     }
 
     showQuestion(questionNr = 1) {
         contentDiv.append(this.createQuestionElement(questionNr));
+    }
+
+    getUserAnswer(questionNr) {
+        console.log("getUserAnswer");
+
+        if (this.questions.questionArray[questionNr].multipleChoice === "true") {
+            let checkboxes = Array.from(document.querySelectorAll('input[class="checkboxAnswer"]:checked'))
+                .filter(function (checkbox) {
+                    return checkbox.checked
+                })
+                .map(function (checkbox) {
+                    return checkbox.id;
+                })
+            this.player.answers.push(checkboxes);
+        } else {
+            this.player.answers.push(document.querySelector('input[name="answer"]:checked').id);
+        }
+    }
+
+    checkAnswer() {
+        //if (this.questions.correctAnswersArray this.player.answers)/////////////////<====FORTSÄTT HÄR
+        this.player.score
+        //if this.player.answer == this.questions.correctAnswerArray push 1
     }
 
     getResult(playerScore) {
@@ -88,16 +101,11 @@ class Quiz { //?
         resultP.innerText = `Total score: ${this.getResult(playerScore)}`;
         console.log("hårdkodat till 3");
         contentDiv.append(resultP);
-        //tabell?
-        //fråga | ditt svar | rätt svar
-        //...
-        //total
     }
 
-    restartQuiz() {
-     
+    /* restartQuiz() {
         //get new set of questions
-    }
+    } */
 }
 
 //------DOMContentLoaded
@@ -121,16 +129,25 @@ document.addEventListener("DOMContentLoaded", () => {
         quiz.setupQuestions(nrOfQuestionsInput.value)
         quiz.welcomePlayer(nameInput.value);
         quiz.round++;
-
         console.log(quiz.questions);
+        startBtn.setAttribute("disabled", "disabled");
     });
 
     nextBtn.addEventListener("click", () => {
+        if (quiz.round == 1) {
+            nextBtn.innerText = "Next";
+        }
+        
+        if (quiz.round > 1) {
+            quiz.getUserAnswer(quiz.round - 1);
+        }
+
         quiz.removeContent();
 
         if (quiz.round === quiz.questions.questionArray.length) {
             quiz.showResult(quiz.player.score);
             console.log("GAME OVER");
+            console.log(quiz);
         } else if (quiz.round === quiz.questions.questionArray.length - 1) {
             quiz.showQuestion(quiz.round);
             quiz.round++;

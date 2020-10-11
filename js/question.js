@@ -40,7 +40,8 @@ class Questions {
 
             //gör instanser av Question av varje fråge-objekt, som pushas till questionArray
             this.questionArray.push(new Question(question.id, question.question, question.multiple_correct_answers, question.answers, question.correct_answers));
-            this.correctAnswersArray.push(question.correct_answers); //pusha frågeobjekt med tillhörande rätt(a) svar.
+            this.correctAnswersArray.push(question.correct_answers);
+            //this.correctAnswersArray.push(Object.keys(question.correct_answers));
         }
     };
 }
