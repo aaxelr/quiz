@@ -1,12 +1,13 @@
-//KLASSER
+//------KLASSER
 
-//klass för enskild fråga.
+//------för enskild fråga.
 class Question {
-  constructor(id, question, answers, correctAnswers) { //vad ska constuctor:n ta för parameter?
-    this.questionId = id; //för att förhindra samma fråga flera ggr
-    this.question = question;
+  constructor(id, question, mutlipleChoice, answers, correctAnswers ) {
+    this.questionId = id;
+    this.question = question; //själva frågan
+    this.multipleChoice = mutlipleChoice; //true eller false
     this.answers = answers; //objekt med svarsalternativ
-    this.correctAnswers = correctAnswers; //det/de egenskaperna med booleanska värdena true.
+    this.correctAnswers = correctAnswers; //det/de egenskaperna med booleanska värdena true. !!!FIXA i Questions.getQuestions
   }
 
   createQuestionElement() {
@@ -18,10 +19,11 @@ class Question {
   }
 }
 
-//klass för samling av quizfrågor 5-10.
+//------ för samling av quizfrågor 5-10.
 class Questions {
   constructor() {
-    this.questionArray = [];
+    this.questionArray = [0];
+    this.correctAnswersArray = [0]; //samlar de rätta svaren för alla frågor i quizet.
   }
 
   //metod som hämtar 5-10 (5 default) frågor
@@ -30,14 +32,27 @@ class Questions {
       .then(response => response.json())
       .then(data => {
         for (let question of data) {
-          //ta bort key in answers med värdet null
-          //ta bort key in correct_answers med värdet false
-          this.questionArray.push(new Question(question.id, question.question, question.answers, question.correct_answers));
+
+          for (let answer in question.answers) {
+            if (question.answers[answer] === null) {
+              console.log(`removing ${answer}: ${question.answers[answer]}`);
+              delete question.answers[answer];
+            }
+          }
+
+          for (let trueAnswer in question.correct_answers) {
+            if (question.correct_answers[trueAnswer] !== "true") {
+              console.log(`removing ${trueAnswer}: ${question.correct_answers[trueAnswer]}`);
+              delete question.correct_answers[trueAnswer];
+            }
+          }
+
+          this.questionArray.push(new Question(question.id, question.question, question.multiple_correct_answers, question.answers, question.correct_answers));
         }
       });
   }
 
-  
+
 
   /* ---------------------------------------------------------------- */
 

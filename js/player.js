@@ -1,4 +1,5 @@
-//KLASS
+//------KLASS för spelare
+
 
 class Player {
     constructor(name = 'stranger') {
