@@ -25,7 +25,6 @@ class Quiz { //?
         contentDiv.innerHTML = "";
     }
 
-    //lägg till eventlyssnare på varje
     createQuestionElement(questionNr) {
         let questionPElement = document.createElement("p");
         questionPElement.textContent = this.questions.questionArray[questionNr].question;
@@ -68,9 +67,8 @@ class Quiz { //?
         contentDiv.append(this.createQuestionElement(questionNr));
     }
 
+    //if tar hand om checkbox-fallen, else om radio-fallen.
     getUserAnswer(questionNr) {
-        console.log("getUserAnswer");
-
         if (this.questions.questionArray[questionNr].multipleChoice === "true") {
             let checkboxes = Array.from(document.querySelectorAll('input[class="checkboxAnswer"]:checked'))
                 .filter(function (checkbox) {
@@ -86,8 +84,19 @@ class Quiz { //?
     }
 
     checkAnswer() {
-        //if (this.questions.correctAnswersArray this.player.answers)/////////////////<====FORTSÄTT HÄR
-        this.player.score
+        //--!!!--!!!--!!!--FIXA, ger bara poäng om det finns fler än ett rätt svar
+        for (let i = 1; i < this.questions.questionArray.length; i++) {
+            if (this.player.answers[i][7] === this.questions.questionArray[i].correctAnswers[7]) {
+                this.player.score.push(1);
+                console.log("if " + this.player.answers[i][7]);
+                console.log("if " + Object.keys(this.questions.questionArray[i].correctAnswers));
+            } else {
+                this.player.score.push(0);
+                console.log("else " + this.player.answers[i][7]);
+                console.log("else " + Object.keys(this.questions.questionArray[i].correctAnswers));
+            }
+        }
+
         //if this.player.answer == this.questions.correctAnswerArray push 1
     }
 
@@ -97,9 +106,24 @@ class Quiz { //?
     }
 
     showResult(playerScore) {
+        this.player.answers.forEach(e => {
+            if (e !== 0) {
+                let userAnswersP = document.createElement("p");
+                userAnswersP.innerText = `Your answer: \n ${e}`;
+                contentDiv.append(userAnswersP);
+            }
+        });
+
+        this.questions.correctAnswersArray.forEach(e => {
+            if (e !== 0) {
+                let correctAnswersP = document.createElement("p");
+                correctAnswersP.innerText = `Correct answer: \n ${e}`;
+                contentDiv.append(correctAnswersP);
+            }
+        });
+
         let resultP = document.createElement("p");
         resultP.innerText = `Total score: ${this.getResult(playerScore)}`;
-        console.log("hårdkodat till 3");
         contentDiv.append(resultP);
     }
 
@@ -137,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (quiz.round == 1) {
             nextBtn.innerText = "Next";
         }
-        
+
         if (quiz.round > 1) {
             quiz.getUserAnswer(quiz.round - 1);
         }
@@ -145,6 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
         quiz.removeContent();
 
         if (quiz.round === quiz.questions.questionArray.length) {
+            quiz.checkAnswer();
             quiz.showResult(quiz.player.score);
             console.log("GAME OVER");
             console.log(quiz);
@@ -156,6 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
             quiz.showQuestion(quiz.round);
             quiz.round++;
         }
+
     });
 
 });
