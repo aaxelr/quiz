@@ -1,87 +1,93 @@
 body {
-  background-color: rgb(0, 0, 50);
-  padding: 10px 30%;
-  font-family: Helvetica, sans-serif;
-  margin: 25px;
+    background-color: rgb(0, 0, 50);
+    padding: 10px 30%;
+    font-family: Helvetica, sans-serif;
+    margin: 25px;
 }
 
 a {
-  font: 1.2em Helvetica;
+    font: 1.2em Helvetica;
 }
 
 a:link,
 a:visited,
 a:hover,
 a:active {
-  text-decoration: none;
-  color: #000000; 
+    text-decoration: none;
+    color: #000000;
 }
 
 header {
-  background-color: rgb(255, 240, 230);
-  border-radius: 15px;
-  padding: 20px;
-  margin: 10px;
-  min-width: 400px;
-  max-width: 800px;
+    background-color: rgb(255, 240, 230);
+    border-radius: 15px;
+    padding: 20px;
+    margin: 10px;
+    min-width: 400px;
+    max-width: 800px;
 }
 
 #title {
-  text-shadow: -4px -3px silver;
+    text-shadow: -4px -3px silver;
 }
 
 #welcome {
-  font-size: 1.4em;
-  text-shadow: 3px -2px silver;
+    font-size: 1.4em;
+    text-shadow: 3px -2px silver;
 }
 
 table {
-  border: none;
-  width: 100%;
+    border: none;
+    width: 100%;
 }
 
 tr {
-  border: none;
-  width: 100%;
+    border: none;
+    width: 100%;
 }
 
-th, td {
-  border: none;
+th,
+td {
+    border: none;
 }
 
 #startTd {
-  text-align: left;
+    text-align: left;
 }
 
-#hiscoreTd, #contactTd {
-  text-align: right;
+#hiscoreTd,
+#contactTd {
+    text-align: right;
 }
 
 .wrapper {
-  background-color: rgb(255, 240, 230);
-  padding: 20px;
-  border-radius: 15px;
-  margin: 10px;
-  min-width: 400px;
-  max-width: 800px;
-  min-height: 400px;
+    background-color: rgb(255, 240, 230);
+    padding: 20px;
+    border-radius: 15px;
+    margin: 10px;
+    min-width: 400px;
+    max-width: 800px;
+    min-height: 400px;
 }
 
 .content {
-  background-color: rgb(255,255,255);
-  padding: 20px;
-  border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 15px;
 }
 
 footer {
-  color: rgb(255, 240, 230);
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  padding: 0px 20px;
+    color: rgb(255, 240, 230);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    padding: 0px 20px;
+}
+
+#footerAnchor {
+    color: rgb(255, 240, 230);
 }
 
 li {
-  margin: 5px;
-  padding: 5px;
+    margin: 5px;
+    padding: 5px;
 }

@@ -153,8 +153,9 @@ document.addEventListener("DOMContentLoaded", () => {
         quiz.setupQuestions(nrOfQuestionsInput.value)
         quiz.welcomePlayer(nameInput.value);
         quiz.round++;
-        console.log(quiz.questions);
-        startBtn.setAttribute("disabled", "disabled");
+        console.log(quiz);
+        startBtn.disabled = true;
+        nextBtn.disabled = false;
     });
 
     nextBtn.addEventListener("click", () => {
@@ -173,6 +174,8 @@ document.addEventListener("DOMContentLoaded", () => {
             quiz.showResult(quiz.player.score);
             console.log("GAME OVER");
             console.log(quiz);
+            nextBtn.innerText = "Game Over";
+            nextBtn.disabled = true;
         } else if (quiz.round === quiz.questions.questionArray.length - 1) {
             quiz.showQuestion(quiz.round);
             quiz.round++;
