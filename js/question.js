@@ -3,11 +3,11 @@
 //------för enskild fråga.
 class Question {
     constructor(id, question, mutlipleChoice, answers, correctAnswers) {
-        this.questionId = id;
-        this.question = question; //själva frågan
-        this.multipleChoice = mutlipleChoice; //true eller false
-        this.answers = answers; //objekt med svarsalternativ
-        this.correctAnswers = correctAnswers; //det/de egenskaperna med booleanska värdena true.
+        this.questionId = id; //skulle kunna användas av metod av klassen Quiz i main.js för att se till att spelaren inte får samma frågor om hen vill spela igen.
+        this.question = question;
+        this.multipleChoice = mutlipleChoice; //true eller false, används för att bestämma om frågorna ska skapas med checkbox eller radio-knapp.
+        this.answers = answers;
+        this.correctAnswers = correctAnswers;
     }
 }
 
@@ -35,14 +35,32 @@ class Questions {
             for (let trueAnswer in question.correct_answers) {
                 if (question.correct_answers[trueAnswer] !== "true") {
                     delete question.correct_answers[trueAnswer];
+                } else {
+                    console.log(trueAnswer);
+                    trueAnswer = trueAnswer.slice(0,8); //slice:ar på rätt ställe, men när jag hämtar senar
+                    //question.correct_answers.trueAnswer.slice(0,8); //ger undefined
+                    //question.correct_answers[trueAnswer].slice(0,8); //uncaught in promise
+                    console.log(trueAnswer);
                 }
             }
 
             //gör instanser av Question av varje fråge-objekt, som pushas till questionArray
             this.questionArray.push(new Question(question.id, question.question, question.multiple_correct_answers, question.answers, question.correct_answers));
             //gör om formatet på correctAnswersArray från objekt till array till sträng.
-            this.correctAnswersArray.push(Object.keys(question.correct_answers));
-            
+            this.correctAnswersArray.push(Object.keys(question.correct_answers)); //pushar en array med det/de rätta svaren till array, men vill kunna ändra namn mha string.slice()
+
         }
     }
+
+    /* formatCorrectAnswers(arr) {
+        for (let element of arr) {
+            if (element !== 0) {
+                for (let innerElement of element) {
+                    innerElement = innerElement.slice(0, 8);
+                    console.log(innerElement);
+                }
+                
+            }
+        }
+    } */
 }

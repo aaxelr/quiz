@@ -44,9 +44,8 @@ class Quiz { //?
 
                 answerLiElement.append(checkbox);
 
-                answersUlElement.append(answerLiElement);
+                answersUlElement.append(answerLiElement); 
             } else {
-
                 let radio = document.createElement("input");
                 radio.setAttribute("id", answer);
                 radio.setAttribute("name", "answer");
@@ -67,6 +66,7 @@ class Quiz { //?
         contentDiv.append(this.createQuestionElement(questionNr));
     }
 
+    //skapar array med det/de rätta svaren.
     //if tar hand om checkbox-fallen, else om radio-fallen.
     getUserAnswer(questionNr) {
         if (this.questions.questionArray[questionNr].multipleChoice === "true") {
@@ -79,7 +79,7 @@ class Quiz { //?
                 })
             this.player.answers.push(checkboxes);
         } else {
-            this.player.answers.push(document.querySelector('input[name="answer"]:checked').id);
+            this.player.answers.push(Array.of(document.querySelector('input[name="answer"]:checked').id));
         }
     }
 
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let nextBtn = document.getElementById("nextBtn");
 
-    //Instansiera Quiz
+    //Instansierar Quiz
     let quiz = new Quiz();
 
     //------Eventlyssnare
@@ -170,6 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
         quiz.removeContent();
 
         if (quiz.round === quiz.questions.questionArray.length) {
+            /* quiz.questions.formatCorrectAnswers(quiz.questions.correctAnswersArray); */
             quiz.checkAnswer();
             quiz.showResult(quiz.player.score);
             console.log("GAME OVER");
