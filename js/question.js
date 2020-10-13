@@ -35,32 +35,18 @@ class Questions {
             for (let trueAnswer in question.correct_answers) {
                 if (question.correct_answers[trueAnswer] !== "true") {
                     delete question.correct_answers[trueAnswer];
-                } else {
-                    console.log(trueAnswer);
-                    trueAnswer = trueAnswer.slice(0,8); //slice:ar på rätt ställe, men när jag hämtar senar
-                    //question.correct_answers.trueAnswer.slice(0,8); //ger undefined
-                    //question.correct_answers[trueAnswer].slice(0,8); //uncaught in promise
-                    console.log(trueAnswer);
                 }
             }
+
+            //slice:ar bort "_correct" från de rätta svaren så elementen ska få samma utseende som de i player.answers.
+            let corrAnswer = Object.keys(question.correct_answers).map(answer => answer.slice(0, 8));
 
             //gör instanser av Question av varje fråge-objekt, som pushas till questionArray
             this.questionArray.push(new Question(question.id, question.question, question.multiple_correct_answers, question.answers, question.correct_answers));
+            
             //gör om formatet på correctAnswersArray från objekt till array till sträng.
-            this.correctAnswersArray.push(Object.keys(question.correct_answers)); //pushar en array med det/de rätta svaren till array, men vill kunna ändra namn mha string.slice()
+            this.correctAnswersArray.push(corrAnswer); //pushar en array med det/de rätta svaren till array.
 
         }
     }
-
-    /* formatCorrectAnswers(arr) {
-        for (let element of arr) {
-            if (element !== 0) {
-                for (let innerElement of element) {
-                    innerElement = innerElement.slice(0, 8);
-                    console.log(innerElement);
-                }
-                
-            }
-        }
-    } */
 }

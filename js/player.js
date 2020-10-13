@@ -7,5 +7,5 @@ class Player {
     }
 }
 
-//Player.answers ska pushas med användarens svar.
-//Player.score ska pushas med 1 om svaret är rätt och 0 om svaret är fel
+//Player.answers pushas med användarens svar.
+//Player.score pushas med 1 om svaret är rätt och 0 om svaret är fel.

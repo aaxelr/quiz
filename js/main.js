@@ -3,12 +3,11 @@ class Quiz { //?
     constructor() {
         this.player;
         this.questions;
-        //this.playedQuestion = []; //array med id från respektive fråga, för att förhindra att samma fråga kommer igen, om spelaren vill spela igen.
         this.round = 0;
     }
 
     createPlayer(name) {
-        this.player = new Player(name)
+        this.player = new Player(name);
     }
 
     welcomePlayer() {
@@ -16,7 +15,7 @@ class Quiz { //?
     }
 
     setupQuestions(numberOfQuestions) {
-        this.questions = new Questions()
+        this.questions = new Questions();
         this.questions.getQuestions(numberOfQuestions);
         return this.questions;
     }
@@ -44,7 +43,7 @@ class Quiz { //?
 
                 answerLiElement.append(checkbox);
 
-                answersUlElement.append(answerLiElement); 
+                answersUlElement.append(answerLiElement);
             } else {
                 let radio = document.createElement("input");
                 radio.setAttribute("id", answer);
@@ -56,7 +55,6 @@ class Quiz { //?
                 answersUlElement.append(answerLiElement);
             }
         }
-
 
         questionPElement.append(answersUlElement);
         return questionPElement;
@@ -72,11 +70,11 @@ class Quiz { //?
         if (this.questions.questionArray[questionNr].multipleChoice === "true") {
             let checkboxes = Array.from(document.querySelectorAll('input[class="checkboxAnswer"]:checked'))
                 .filter(function (checkbox) {
-                    return checkbox.checked
+                    return checkbox.checked;
                 })
                 .map(function (checkbox) {
                     return checkbox.id;
-                })
+                });
             this.player.answers.push(checkboxes);
         } else {
             this.player.answers.push(Array.of(document.querySelector('input[name="answer"]:checked').id));
@@ -84,20 +82,15 @@ class Quiz { //?
     }
 
     checkAnswer() {
-        //--!!!--!!!--!!!--FIXA, ger bara poäng om det finns fler än ett rätt svar
         for (let i = 1; i < this.questions.questionArray.length; i++) {
-            if (this.player.answers[i][7] === this.questions.questionArray[i].correctAnswers[7]) {
+            if (this.player.answers[i].toString() === this.questions.correctAnswersArray[i].toString()) {
                 this.player.score.push(1);
-                console.log("if " + this.player.answers[i][7]);
-                console.log("if " + Object.keys(this.questions.questionArray[i].correctAnswers));
+                console.log(`från if ${this.player.answers[i]}`);
             } else {
                 this.player.score.push(0);
-                console.log("else " + this.player.answers[i][7]);
-                console.log("else " + Object.keys(this.questions.questionArray[i].correctAnswers));
+                console.log(`från else ${this.player.answers[i]}`);
             }
         }
-
-        //if this.player.answer == this.questions.correctAnswerArray push 1
     }
 
     getResult(playerScore) {
@@ -106,30 +99,28 @@ class Quiz { //?
     }
 
     showResult(playerScore) {
-        this.player.answers.forEach(e => {
-            if (e !== 0) {
-                let userAnswersP = document.createElement("p");
-                userAnswersP.innerText = `Your answer: \n ${e}`;
-                contentDiv.append(userAnswersP);
-            }
-        });
-
-        this.questions.correctAnswersArray.forEach(e => {
-            if (e !== 0) {
-                let correctAnswersP = document.createElement("p");
-                correctAnswersP.innerText = `Correct answer: \n ${e}`;
-                contentDiv.append(correctAnswersP);
-            }
-        });
-
-        let resultP = document.createElement("p");
+        let resultP = document.createElement("h2");
         resultP.innerText = `Total score: ${this.getResult(playerScore)}`;
         contentDiv.append(resultP);
+
+        let restartBtn = document.createElement("button");
+        restartBtn.setAttribute("type", "button");
+        restartBtn.innerText = "Play Again!";
+        restartBtn.addEventListener("click", () => {
+            this.restartQuiz();
+        })
+
+        contentDiv.append(restartBtn);
     }
 
-    /* restartQuiz() {
-        //get new set of questions
-    } */
+    restartQuiz() {
+        localStorage.setItem('name', this.player.name)
+        location.reload(); //fullösning
+        
+        this.player.name = localStorage.getItem('name');
+        this.welcomePlayer();
+        welcome.innerText = `Welcome back, ${this.player.name}`;
+    }
 }
 
 //------DOMContentLoaded
@@ -148,9 +139,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let quiz = new Quiz();
 
     //------Eventlyssnare
+
     startBtn.addEventListener("click", () => {
-        quiz.createPlayer(nameInput.value)
-        quiz.setupQuestions(nrOfQuestionsInput.value)
+        quiz.createPlayer(nameInput.value);
+        quiz.setupQuestions(nrOfQuestionsInput.value);
         quiz.welcomePlayer(nameInput.value);
         quiz.round++;
         console.log(quiz);
@@ -170,7 +162,6 @@ document.addEventListener("DOMContentLoaded", () => {
         quiz.removeContent();
 
         if (quiz.round === quiz.questions.questionArray.length) {
-            /* quiz.questions.formatCorrectAnswers(quiz.questions.correctAnswersArray); */
             quiz.checkAnswer();
             quiz.showResult(quiz.player.score);
             console.log("GAME OVER");
@@ -180,12 +171,10 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (quiz.round === quiz.questions.questionArray.length - 1) {
             quiz.showQuestion(quiz.round);
             quiz.round++;
-            nextBtn.innerText = "End Quiz"
+            nextBtn.innerText = "End Quiz";
         } else {
             quiz.showQuestion(quiz.round);
             quiz.round++;
         }
-
     });
-
 });
