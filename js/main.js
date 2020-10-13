@@ -24,8 +24,8 @@ class Quiz { //?
         contentDiv.innerHTML = "";
     }
 
-    //skapar frågor. först allt som de har gemensamt,
-    //sedan tar if hand om flervalsfrågor och else om envalsfrågor.
+    //Skapar frågor. Först allt som de har gemensamt,
+    //Sedan tar if hand om flervalsfrågor och else om envalsfrågor.
     createQuestionElement(questionNr) {
         let questionNrPElement = document.createElement("h5");
         questionNrPElement.textContent = `question ${questionNr} of ${this.questions.questionArray.length - 1}`
@@ -70,8 +70,8 @@ class Quiz { //?
         contentDiv.append(this.createQuestionElement(questionNr));
     }
 
-    //skapar array med det/de rätta svaren.
-    //if tar hand om checkbox-fallen, else om radio-fallen.
+    //Skapar array med det/de rätta svaren.
+    //If tar hand om checkbox-fallen, else om radio-fallen.
     getUserAnswer(questionNr) {
         if (this.questions.questionArray[questionNr].multipleChoice === "true") {
             let checkboxes = Array.from(document.querySelectorAll('input[class="checkboxAnswer"]:checked'))
@@ -87,7 +87,7 @@ class Quiz { //?
         }
     }
 
-    //jämför array av spelarens svar med array av rätt svar.
+    //Jämför array av spelarens svar med array av rätt svar.
     checkAnswer() {
         for (let i = 1; i < this.questions.questionArray.length; i++) {
             if (this.player.answers[i].toString() === this.questions.correctAnswersArray[i].toString()) {
@@ -105,6 +105,7 @@ class Quiz { //?
         return playerScore;
     }
 
+    //Visar resultat, skapar restart-knapp.ß
     showResult(playerScore) {
         let resultP = document.createElement("h2");
         resultP.innerText = `Total score: ${this.getResult(playerScore)}`;
@@ -120,12 +121,12 @@ class Quiz { //?
         contentDiv.append(restartBtn);
     }
 
-    //fullösning. Försöker spara namnet i localStorage, ladda om sidan, lägga in namnet från localStorage. 
+    //Fullösning. Försöker spara namnet i localStorage, ladda om sidan, lägga in namnet från localStorage. 
     restartQuiz() {
         localStorage.setItem('name', this.player.name)
         location.reload();
 
-        //hinner sätta namnet, men det ändras tillbaka till default.
+        //Hinner sätta namnet, men det ändras tillbaka till default.
         this.player.name = localStorage.getItem('name');
         this.welcomePlayer();
         welcome.innerText = `Welcome back, ${this.player.name}`;
@@ -135,13 +136,12 @@ class Quiz { //?
 //------DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
 
-    //------HTML-element
+    //------getElement
     let setupBtn = document.getElementById("setupBtn");
     let welcome = document.getElementById("welcome");
     let nrOfQuestionsInput = document.getElementById("nrOfQuestionsInput");
     let nameInput = document.getElementById("nameInput");
     let contentDiv = document.getElementById("contentDiv");
-
     let nextBtn = document.getElementById("nextBtn");
 
     //Instansierar Quiz

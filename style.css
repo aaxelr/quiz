@@ -75,6 +75,13 @@ td {
     border-radius: 15px;
 }
 
+#whisper {
+    font-size: 0.8em;
+    font-style: italic;
+    color: rgba(0, 0, 0, 0.333);
+    text-shadow: 1px 1px rgba(105, 17, 17, 0.333);
+}
+
 footer {
     color: rgb(255, 240, 230);
     position: fixed;

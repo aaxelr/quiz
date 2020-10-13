@@ -38,46 +38,39 @@
             </nav>
         </table>
     </header>
-    <table>
-
-        <!-- 
-        startsida med namnformulär, starta quiz-knapp
-        quizets regler, förklaring av hints (poängavdrag? visa antal hints använda)
-        
-    -->
-        <!-- Main element containing quiz form -->
-        <main>
-            <div class="wrapper">
-                <div id="contentDiv">
-                    <label for="nameInput">Enter your name:</label><br>
-                    <input id="nameInput" type="text" value="stranger" placeholder="Anything will do! :)"
-                        required="required"><br><br>
-                    <label for="nrOfQuestionsInput">Choose # of Questions (5–10):</label><br>
-                    <input id="nrOfQuestionsInput" type="number" min="5" max="10" value="5"><br><br>
-                    <form>
-                        <label for="setupBtn">Confirm name and number of questions:</label>
-                        <button id="setupBtn" type="button">OK!</button>
-                    </form>
-                    <h4>Rules:</h4>
-                    <p>Choose the correct answer(s). You get one point per question answered correctly.<br><br>
-                        Questions with only one correct answer will only let you choose one answer.<br><br>
-                        Questions with more than one possible answer will let you choose any or all answers.<br><br>
-                        Good Luck! :)</p>
-                </div>
+    <!-- Main element containing quiz form -->
+    <main>
+        <div class="wrapper">
+            <div id="contentDiv">
+                <label for="nameInput">Enter your name:</label><br>
+                <input id="nameInput" type="text" value="stranger" placeholder="Anything will do! :)"
+                    required="required"><br><br>
+                <label for="nrOfQuestionsInput">Choose # of Questions (5–10):</label><br>
+                <input id="nrOfQuestionsInput" type="number" min="5" max="10" value="5"><br><br>
                 <form>
-                    <br>
-                    <button id="nextBtn" type="button" disabled>Go!</button>
+                    <label for="setupBtn">Confirm name and number of questions:</label>
+                    <button id="setupBtn" type="button">OK!</button>
                 </form>
+                <h4>Rules:</h4>
+                <p>Choose the correct answer(s). You get one point per question answered correctly.<br><br>
+                    Questions with only one correct answer will only let you choose one answer.<br><br>
+                    Questions with more than one possible answer will let you choose any or all answers.<br><br>
+                    Good Luck! <span id="whisper">There's no turning back.</span> :)</p>
             </div>
-        </main>
+            <form>
+                <br>
+                <button id="nextBtn" type="button" disabled>Go!</button>
+            </form>
+        </div>
+    </main>
 
-        <footer>
-            <h6>©®™ 2020 ~~~ Questions got from <a id="footerAnchor" href="https://quizapi.io/">QuizAPI.io</a> </h6>
-        </footer>
+    <footer>
+        <h6>©®™ 2020 ~~~ Questions got from <a id="footerAnchor" href="https://quizapi.io/">QuizAPI.io</a> </h6>
+    </footer>
 
-        <script src="js/player.js"></script>
-        <script src="js/question.js"></script>
-        <script src="js/main.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/question.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
