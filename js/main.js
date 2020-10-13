@@ -24,7 +24,12 @@ class Quiz { //?
         contentDiv.innerHTML = "";
     }
 
+    //skapar frågor. först allt som de har gemensamt,
+    //sedan tar if hand om flervalsfrågor och else om envalsfrågor.
     createQuestionElement(questionNr) {
+        let questionNrPElement = document.createElement("h5");
+        questionNrPElement.textContent = `question ${questionNr} of ${this.questions.questionArray.length - 1}`
+
         let questionPElement = document.createElement("p");
         questionPElement.textContent = this.questions.questionArray[questionNr].question;
 
@@ -57,6 +62,7 @@ class Quiz { //?
         }
 
         questionPElement.append(answersUlElement);
+        questionPElement.append(questionNrPElement);
         return questionPElement;
     }
 
@@ -81,6 +87,7 @@ class Quiz { //?
         }
     }
 
+    //jämför array av spelarens svar med array av rätt svar.
     checkAnswer() {
         for (let i = 1; i < this.questions.questionArray.length; i++) {
             if (this.player.answers[i].toString() === this.questions.correctAnswersArray[i].toString()) {
@@ -113,10 +120,12 @@ class Quiz { //?
         contentDiv.append(restartBtn);
     }
 
+    //fullösning. Försöker spara namnet i localStorage, ladda om sidan, lägga in namnet från localStorage. 
     restartQuiz() {
         localStorage.setItem('name', this.player.name)
-        location.reload(); //fullösning
-        
+        location.reload();
+
+        //hinner sätta namnet, men det ändras tillbaka till default.
         this.player.name = localStorage.getItem('name');
         this.welcomePlayer();
         welcome.innerText = `Welcome back, ${this.player.name}`;
@@ -127,7 +136,7 @@ class Quiz { //?
 document.addEventListener("DOMContentLoaded", () => {
 
     //------HTML-element
-    let startBtn = document.getElementById("startBtn");
+    let setupBtn = document.getElementById("setupBtn");
     let welcome = document.getElementById("welcome");
     let nrOfQuestionsInput = document.getElementById("nrOfQuestionsInput");
     let nameInput = document.getElementById("nameInput");
@@ -138,18 +147,18 @@ document.addEventListener("DOMContentLoaded", () => {
     //Instansierar Quiz
     let quiz = new Quiz();
 
-    //------Eventlyssnare
-
-    startBtn.addEventListener("click", () => {
+    //Sparar spelarnamn och väljer antal frågor.
+    setupBtn.addEventListener("click", () => {
         quiz.createPlayer(nameInput.value);
         quiz.setupQuestions(nrOfQuestionsInput.value);
         quiz.welcomePlayer(nameInput.value);
         quiz.round++;
         console.log(quiz);
-        startBtn.disabled = true;
+        setupBtn.disabled = true;
         nextBtn.disabled = false;
     });
 
+    //Startar spelet och stegar igenom frågor.
     nextBtn.addEventListener("click", () => {
         if (quiz.round == 1) {
             nextBtn.innerText = "Next";
